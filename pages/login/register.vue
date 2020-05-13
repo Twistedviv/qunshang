@@ -21,6 +21,10 @@
 					placeholder="登录密码"
 					isShowPass
 				></wInput>
+				
+				<wPicker :pick-array="['群主','主播','群商','会员','粉丝']">	
+				</wPicker>
+				
 				<wInput
 					v-model="verCode"
 					type="number"
@@ -58,6 +62,7 @@
 	var _this;
 	import wInput from '../../components/watch-login/watch-input.vue' //input
 	import wButton from '../../components/watch-login/watch-button.vue' //button
+	import wPicker from '../../components/watch-login/watch-picker.vue'
 	
 	export default {
 		data() {
@@ -69,11 +74,15 @@
 				verCode:"", //验证码
 				showAgree:true, //协议是否选择
 				isRotate: false, //是否加载旋转
+				
+				identity:"" ,//身份
+				
 			}
 		},
 		components:{
 			wInput,
 			wButton,
+			wPicker,
 		},
 		mounted() {
 			_this= this;
