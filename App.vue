@@ -1,5 +1,6 @@
 <script>
 	import Vue from 'vue'
+	import store from "store/store.js"
 	
 	export default {
 		created() {
@@ -20,23 +21,32 @@
 						Vue.prototype.CustomBar = e.statusBarHeight + 45;
 					};
 					// #endif
-		
-					// #ifdef MP-WEIXIN
-					Vue.prototype.StatusBar = e.statusBarHeight;
-					let custom = wx.getMenuButtonBoundingClientRect();
-					Vue.prototype.Custom = custom;
-					Vue.prototype.CustomBar = custom.bottom + custom.top - e.statusBarHeight;
-					// #endif		
-		
-					// #ifdef MP-ALIPAY
-					Vue.prototype.StatusBar = e.statusBarHeight;
-					Vue.prototype.CustomBar = e.statusBarHeight + e.titleBarHeight;
-					// #endif
 				}
 			})
+			
+
+			
 		},
 		onShow: function() {
+			
 			console.log('App 开启')
+			//app onShow时，检查是否已登录，否则跳转登录
+			try {
+				uni.getStorage({key:'userData',
+					success:function(res){
+						console.log("自动登陆成功："+JSON.stringify(res.data))
+						store.dispatch("setUserData",res.data); //存入Vuex状态
+					},
+					fail:function(){
+						console.log("获取用户数据失败")
+						uni.reLaunch({
+							url: 'pages/login/login',
+						});
+					}
+				})} catch (e) {
+					console.log("检查缓存出错："+e)
+				}
+			
 		},
 		onHide: function() {
 			console.log('App 关闭')
@@ -46,8 +56,5 @@
 
 <style >
 
-	body{
-		background: #FFFFFF !important;
-	}
-	
+
 </style>

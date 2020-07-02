@@ -1,0 +1,105 @@
+<template>
+	<view>
+		<swiper vertical="true"  @change="changeSwiperItem" :style="{height:windowHeight+'px'}" class="swiper" >
+			<swiper-item v-for="(videoItem,index) in videoList" :key="index" class="swiper-item">
+				<video @tap="tapVideo" :src="videoItem.src" :id="'video'+index" :show-progress="true" :autoplay="index==0?true:false" :loop="true" :show-center-play-btn="false" :style="{height:windowHeight+'px'}" controls="false" class="video">
+					
+					<cover-view class="cover-view-container">
+						
+						<cover-view class="cover-view-item">
+							<cover-image class="cover-image" src="../../static/img/short-video/heart.png"></cover-image>
+							<cover-view class="cover-view"><text class="cover-view-text">赞</text></cover-view>
+						</cover-view>
+						
+					
+						<cover-view class="cover-view-item">
+							<cover-image class="cover-image" src="../../static/img/short-video/ver-code.png"></cover-image>
+							<cover-view class="cover-view"><text class="cover-view-text">评论</text></cover-view>
+						</cover-view>
+						
+						<cover-view class="cover-view-item">
+							<cover-image class="cover-image" src="../../static/img/short-video/share.png"></cover-image>
+							<cover-view class="cover-view"><text class="cover-view-text">转发</text></cover-view>
+						</cover-view>
+					</cover-view>
+				</video>
+				
+			</swiper-item>
+		</swiper>
+	</view>
+</template>
+
+<script>
+	
+	export default {
+		data(){
+			return{
+				currentSwiperIndex:0,  //当前Item下标
+				currentSwiperState:true  //当前Item的播放状态：true为播放，false为暂停
+				
+			}
+		},
+		computed:{
+			currentVideoId:currentSwiperIndex => currentSwiperIndex.toString(),
+			
+		},
+		
+		props:{
+			videoList:Array,
+			windowHeight:Number
+		},
+		
+		methods:{
+			//切换Item时，stop上一个， play这一个
+			changeSwiperItem:function(event){
+				console.log(this.currentSwiperIndex)
+				this.Video = uni.createVideoContext("video"+this.currentSwiperIndex,this)
+				this.Video.stop()
+				this.currentSwiperIndex = event.detail.current
+				console.log(this.currentSwiperIndex)
+				this.Video = uni.createVideoContext("video"+this.currentSwiperIndex,this)
+				this.Video.play()
+				
+			},
+			//点击Item时，判断当前状态，决定暂停还是播放
+			tapVideo:function(event){
+				console.log("tap occur！")
+				this.Video = uni.createVideoContext("video"+this.currentSwiperIndex,this)
+				if(this.currentSwiperState == true){
+					this.Video.pause()
+					this.currentSwiperState = false
+				}else{
+					this.Video.play()
+					this.currentSwiperState = true
+				}
+			}
+		}
+	}
+</script>
+
+<style>
+	.video{
+		position: relative;
+	}
+	.cover-view-container{
+		position: absolute;
+		flex-direction: column;
+		right: 20px;
+		bottom: 100px;
+	}
+	.cover-view-item{
+		margin-top: 20px;
+	}
+	.cover-image{
+		width: 35px;
+		height: 35px;
+	}
+	.cover-view{
+		margin-top: 5px;
+	}
+	.cover-view-text{
+		font-size: 12px;
+		text-align: center;
+		
+	}
+</style>

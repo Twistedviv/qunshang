@@ -1,25 +1,103 @@
 {
     "pages": [ //pages数组中第一项表示应用启动页,
         {
+            "path" : "pages/index/index",
+            "style" : {
+        		"navigationBarTitleText":"首页",
+        		"navigationBarShadow":{
+        			"colorType":"grey"
+        		},
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#F8F8F8",
+				"backgroundColor": "#F8F8F8",
+				"navigationStyle":"default"
+        		
+        	}
+        },{
             "path": "pages/login/login",
-            "style": {}
+            "style": {
+				"navigationStyle":"custom"
+			}
         }, {
             "path": "pages/login/forget",
-            "style": {}
+            "style": {
+				"navigationStyle":"custom"
+			}
         }, {
             "path": "pages/login/register",
-            "style": {}
-        } 
+            "style": {
+				"navigationStyle":"custom"
+			}
+        }, {
+            "path" : "pages/live/live",
+            "style" : {}
+        }, {
+            "path" : "pages/short-video/short-video",
+            "style" : {
+				"navigationStyle":"custom"
+			}
+        }, {
+            "path" : "pages/user/user",
+            "style" : {}
+        }, {
+            "path" : "pages/message/message",
+            "style" : {
+				"navigationBarTitleText":"消息",
+				"navigationBarShadow":{
+					"colorType":"grey"
+				},
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#F8F8F8",
+				"backgroundColor": "#F8F8F8",
+				"navigationStyle":"default"
+			}
+        }, {
+            "path" : "pages/mine/mine",
+            "style" : {
+				"navigationBarTitleText":"我的",
+				"navigationBarShadow":{
+					"colorType":"grey"
+				}
+			}
+        }
         ,{
-            "path" : "pages/index/index",
+            "path" : "pages/test/test",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/goodswindow/goodswindow",
             "style" : {}
         }
     ],
     "globalStyle": {
-    	"navigationBarTextStyle": "black",
-    	"navigationBarTitleText": "登陆模板",
-    	"navigationBarBackgroundColor": "#F8F8F8",
-    	"backgroundColor": "#F8F8F8",
-    	"navigationStyle": "custom"
-    }
+		"navigationStyle":"custom"
+    },
+	"tabBar":{
+		"color":"#707070",
+		"selectedColor":"#007AFF",
+		"backgroundColor":"#ffffff",
+		"list":[{
+			"pagePath":"pages/index/index",
+			"iconPath":"static/img/tabbar/home.png",
+			"selectedIconPath":"static/img/tabbar/home%20(1).png",
+			"text":"首页"
+		},{
+			"pagePath":"pages/short-video/short-video",
+			"iconPath":"static/img/tabbar/icon_player.png",
+			"selectedIconPath":"static/img/tabbar/icon_player%20(1).png",
+			"text":"短视频"
+		},{
+			"pagePath":"pages/message/message",
+			"iconPath":"static/img/tabbar/notice.png",
+			"selectedIconPath":"static/img/tabbar/notice%20(1).png",
+			"text":"消息"
+		},{
+			"pagePath":"pages/mine/mine",
+			"iconPath":"static/img/tabbar/user.png",
+			"selectedIconPath":"static/img/tabbar/user%20(1).png",
+			"text":"我的"
+		}]
+		
+		
+	}
 }

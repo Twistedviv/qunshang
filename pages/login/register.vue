@@ -1,6 +1,6 @@
 <template>
 	<view class="register">
-	
+		<view>{{identity}}</view>
 		<view class="content">
 			<!-- 头部logo -->
 			<view class="header">
@@ -22,7 +22,7 @@
 					isShowPass
 				></wInput>
 				
-				<wPicker :pick-array="['群主','主播','群商','会员','粉丝']">	
+				<wPicker :pick-array="['群主','主播','群商','会员','粉丝']" v-model="identity">	
 				</wPicker>
 				
 				<wInput
@@ -74,8 +74,7 @@
 				verCode:"", //验证码
 				showAgree:true, //协议是否选择
 				isRotate: false, //是否加载旋转
-				
-				identity:"" ,//身份
+				identity: "" ,//身份
 				
 			}
 		},
@@ -96,8 +95,7 @@
 				//获取验证码
 				if (_this.phoneData.length != 11) {
 				     uni.showToast({
-				        icon: 'none',
-						position: 'center',
+				        icon: 'none',	
 				        title: '手机号不正确'
 				    });
 				    return false;
@@ -106,7 +104,6 @@
 				this.$refs.runCode.$emit('runCode'); //触发倒计时（一般用于请求成功验证码后调用）
 				uni.showToast({
 				    icon: 'none',
-					position: 'center',
 				    title: '模拟倒计时触发'
 				});
 				
@@ -114,7 +111,6 @@
 					_this.$refs.runCode.$emit('runCode',0); //假装模拟下需要 终止倒计时
 					uni.showToast({
 					    icon: 'none',
-						position: 'center',
 					    title: '模拟倒计时终止'
 					});
 				},3000)
@@ -128,7 +124,6 @@
 				if (this.showAgree == false) {
 				    uni.showToast({
 				        icon: 'none',
-						position: 'center',
 				        title: '请先同意《协议》'
 				    });
 				    return false;
@@ -136,7 +131,6 @@
 				if (this.phoneData.length !=11) {
 				    uni.showToast({
 				        icon: 'none',
-						position: 'center',
 				        title: '手机号不正确'
 				    });
 				    return false;
@@ -144,15 +138,20 @@
 		        if (this.passData.length < 6) {
 		            uni.showToast({
 		                icon: 'none',
-						position: 'center',
 		                title: '密码不正确'
 		            });
 		            return false;
 		        }
+				if (this.identity == "") {
+				    uni.showToast({
+				        icon: 'none',
+				        title: '未选择身份'
+				    });
+				    return false;
+				}
 				if (this.verCode.length != 4) {
 				    uni.showToast({
 				        icon: 'none',
-						position: 'center',
 				        title: '验证码不正确'
 				    });
 				    return false;
@@ -162,14 +161,13 @@
 				setTimeout(function(){
 					_this.isRotate=false
 				},3000)
-				
-				
 				uni.request({
 					url:"http://192.168.1.23:80/qunshangPHP/register.php",
 					method:"POST",
 					data:{
 						phoneData:this.phoneData,
-						passData:this.passData
+						passData:this.passData,
+						identity:this.identity
 					},
 					header:{
 						"content-type":"application/x-www-form-urlencoded"
@@ -181,7 +179,6 @@
 							//注册成功，1s后跳转登陆界面
 							uni.showToast({
 								icon: 'none',
-								position: 'center',
 								title: '注册成功'
 							});
 							setTimeout(function(){
@@ -195,7 +192,6 @@
 							//注册失败，打印错误信息
 							uni.showToast({
 								icon: 'none',
-								position: 'center',
 								title: res.data.errMsg
 							});
 						}

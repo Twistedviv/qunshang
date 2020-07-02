@@ -1,0 +1,146 @@
+<template>
+	<view class="container">
+		<swiper vertical="true"  @change="changeSwiperItem" :style="{height:windowHeight+'px'}" class="swiper" >
+			<swiper-item v-for="(videoItem,index) in videoList" :key="index" class="swiper-item">
+			
+				<video @tap="tapVideo" :src="videoItem.src" :id="'video'+index" v-if="index==currentSwiperIndex" :autoplay="true" :loop="true" :style="{height:windowHeight+'px'}" controls="false" class="video">
+					
+					<cover-view class="cover-view-container">
+						
+						<cover-view class="cover-view-item">
+							<cover-image class="cover-image" src="../../static/img/short-video/heart.png"></cover-image>
+							<cover-view class="cover-view"><text class="cover-view-text">赞</text></cover-view>
+						</cover-view>
+						
+					
+						<cover-view class="cover-view-item">
+							<cover-image class="cover-image" src="../../static/img/short-video/ver-code.png"></cover-image>
+							<cover-view class="cover-view"><text class="cover-view-text">评论</text></cover-view>
+						</cover-view>
+						
+						<cover-view class="cover-view-item">
+							<cover-image class="cover-image" src="../../static/img/short-video/share.png"></cover-image>
+							<cover-view class="cover-view"><text class="cover-view-text">转发</text></cover-view>
+						</cover-view>
+					</cover-view>
+				</video>
+			
+				
+			</swiper-item>
+		</swiper>
+	</view>
+</template>
+
+<script>
+
+	import store from "../../store/store.js"
+	
+	export default {
+		data:{
+			videoList:[
+			{
+				src:"https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200fc80000brcq4qpevctv7pnq6thg&ratio=720p&line=0"
+			},
+			{
+				src:"https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200fe70000bquvmisthbi0h53ah6d0&ratio=720p&line=0"
+			},
+			{
+				src:"https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200f5c0000bru6m13pqv6apkc3cke0&ratio=720p&line=0"
+			},
+			{
+				src:"https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200f4f0000brrbntdahtm68pamna30&ratio=720p&line=0"
+			},
+			{
+				src:"https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200f7f0000brq6mkkmavf54vk2get0&ratio=720p&line=0"
+			},
+			{
+				src:"https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200f3c0000bruns0l9688i25vnv0hg&ratio=720p&line=0"
+			},
+			{
+				src:"https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200f090000brtuno32ap943039khmg&ratio=720p&line=0"
+					
+			}
+			],
+			currentSwiperIndex:0,  //当前Item下标
+			currentSwiperState:true,  //当前Item的播放状态：true为播放，false为暂停
+			windowHeight:100
+		},
+		computed:{
+			currentVideoId:currentSwiperIndex => currentSwiperIndex.toString(),
+		},
+		created:function(){
+			store.commit('getWindowsHeight')
+			this.windowHeight = store.state.windowHeight
+			console.log("created!当前页面"+this.windowHeight)
+		},
+		onShow:function(){
+			this.Video = uni.createVideoContext("video"+this.currentSwiperIndex,this)
+			this.Video.play()
+		},
+		onHide:function(){
+			this.Video = uni.createVideoContext("video"+this.currentSwiperIndex,this)
+			this.Video.pause()
+		},
+		methods:{
+			//切换Item时，stop上一个， play这一个
+			changeSwiperItem:function(event){
+				console.log(this.currentSwiperIndex)
+				this.Video = uni.createVideoContext("video"+this.currentSwiperIndex,this)
+				this.Video.stop()
+				this.currentSwiperIndex = event.detail.current
+				console.log(this.currentSwiperIndex)
+				this.Video = uni.createVideoContext('video'+this.currentSwiperIndex,this)
+				this.Video.play()
+				
+			},
+			//点击Item时，判断当前状态，决定暂停还是播放
+			tapVideo:function(event){
+				console.log("tap occur！")
+				this.Video = uni.createVideoContext("video"+this.currentSwiperIndex,this)
+				if(this.currentSwiperState == true){
+					this.Video.pause()
+					this.currentSwiperState = false
+				}else{
+					this.Video.play()
+					this.currentSwiperState = true
+				}
+			}
+		}
+	}
+</script>
+
+<style>
+	.swiper{
+		flex-direction: column;
+		flex-wrap: wrap;
+	}
+	.swiper-item{
+		
+	}
+	.video{
+		position: relative;
+	}
+	.cover-view-container{
+		position: absolute;
+		flex-direction: column;
+		right: 20px;
+		bottom: 100px;
+	}
+	.cover-view-item{
+		margin-top: 20px;
+		
+	}
+	.cover-image{
+		width: 35px;
+		height: 35px;
+	}
+	.cover-view{
+		margin-top: 5px;
+	}
+	.cover-view-text{
+		font-size: 12px;
+		text-align: center;
+		color: #FFFFFF;
+		
+	}
+</style>

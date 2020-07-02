@@ -1,8 +1,8 @@
 <template>
 	<view>
-		<picker mode="selector" :range="pickArray" :value="index" @change="bindPickerChange">
+		<picker mode="selector" :range="pickArray" :value="value" @change="$emit('input',$event.detail.value)">
 			<view class="main-list oBorder">
-				<input class="main-input" disabled="true" placeholder="请选择身份" v-model="pickArray[index]"></input>
+				<input class="main-input" disabled="true" placeholder="请选择身份" v-model="pickArray[value]"></input>
 			</view>
 		</picker>
 	</view>
@@ -12,17 +12,16 @@
 	export default {
 		data() {
 			return {
-				index:""
+				
 			};
 		},
+		
 		props:{
 			pickArray:Array,
+			value:Number,
 		},
 		methods:{
-			bindPickerChange: function(e) {
-			    console.log('picker发送选择改变，携带值为', e.target.value)
-			    this.index = e.target.value
-			},
+
 		}
 	}
 </script>
