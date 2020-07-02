@@ -2,7 +2,7 @@
 http://pic.51yuansu.com/pic2/cover/00/27/31/57fd98ab8e47b_610.jpg
 http://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20190115/87868f21befc4e7f9007aa71efa79621.jpeg
 
-###群商数据库的创建
+### 群商数据库的创建
 ```sql
 create database db_qunshang
 default character set utf8
