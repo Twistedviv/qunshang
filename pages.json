@@ -61,7 +61,6 @@
 				},
 				"navigationBarTextStyle": "black",
 				"navigationBarBackgroundColor": "#F8F8F8",
-				"backgroundColor": "#F8F8F8",
 				"navigationStyle":"default"
 			}
         }, {
@@ -80,6 +79,18 @@
         ,{
             "path" : "pages/goodswindow/goodswindow",
             "style" : {}
+        }
+        ,{
+            "path" : "pages/index/inviting/inviting",
+            "style" : {
+				"navigationBarTitleText":"邀请",
+				"navigationBarShadow":{
+					"colorType":"grey"
+				},
+				"navigationBarTextStyle": "black",
+				"navigationBarBackgroundColor": "#F8F8F8",
+				"navigationStyle":"default"
+			}
         }
     ],
     "globalStyle": {

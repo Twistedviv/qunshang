@@ -29,7 +29,7 @@
 					<view class="item-right">
 						> 
 					</view></view>
-				<view class="grid-right-item" id="right-item-3">
+				<view class="grid-right-item" id="right-item-3" @click="inviting">
 					<view class="item-left">
 						邀请好友
 					</view>
@@ -75,6 +75,14 @@
 						console.log("scan success!");
 						console.log("内容为："+res.result);
 						console.log("路径为："+res.path);
+					}
+				})
+			},
+			inviting(){
+				uni.navigateTo({
+					url:"inviting/inviting",
+					success:function(){
+						console.log("跳转邀请页面成功！");
 					}
 				})
 			}

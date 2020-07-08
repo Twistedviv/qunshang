@@ -6,16 +6,16 @@
 		</live-pusher>
 		<cover-view class="sets">
 			<cover-view class="set-item" @click="switchCamera">
-				<cover-view class="set-img img-1"></cover-view>
-				<cover-view class="set-title">转换</cover-view>
+				<cover-image class="set-img img-1" src="../../static/img/live/switch.png"></cover-image>
+				<text class="set-title">转换</text>
 			</cover-view>
-			<cover-view class="set-item" :class="{beautify:beauty}" @click="beauty">
-				<cover-view class="set-img img-2"></cover-view>
-				<cover-view class="set-title">美颜</cover-view>
+			<cover-view class="set-item" @click="beBeauty">
+				<cover-image class="set-img img-2" :src="beautySrc"></cover-image>
+				<text class="set-title" :style="{color:isBeautify?'#007AFF':'#ffffff'}">美颜</text>
 			</cover-view>
-			<cover-view class="set-item" :class="{white:whiteness}" @click="whiteness">
-				<cover-view class="set-img img-3"></cover-view>
-				<cover-view class="set-title">美白</cover-view>
+			<cover-view class="set-item" @click="beWhite">
+				<cover-image class="set-img img-3" :src="whiteSrc"></cover-image>
+				<text class="set-title" :style="{color:isWhite?'#007AFF':'#ffffff'}">美白</text>
 			</cover-view>
 		</cover-view>
 		        <button class="btn" @click="start">开始推流</button>
@@ -37,8 +37,23 @@
              fil: true,
 			 windowHeight:100,
 			 beauty:0,	//美颜
-			 whiteness:0  //美白
+			 whiteness:0  ,//美白
+			 isBeautify:false,
+			 isWhite:false,
+			 
         },
+		computed:{
+			beautySrc:function(){
+				let selected = "../../static/img/live/beautyselected.png";
+				let unSelsected = "../../static/img/live/beauty.png";
+				return (this.isBeautify ? selected : unSelsected);
+			},
+			whiteSrc:function(){
+				let selected = "../../static/img/live/whiteselected.png";
+				let unSelsected = "../../static/img/live/whiteness.png";
+				return (this.isWhite ? selected : unSelsected);
+			}
+		},
         onReady() {
              // 注意：需要在onReady中 或 onLoad 延时
                         this.context = uni.createLivePusherContext("livePusher", this);
@@ -121,11 +136,27 @@
 				        }
 				    });
 				},
-				beauty:function(){
+				
+				//切换美颜0/1，并切换class
+				beBeauty:function(){
 					if(this.beauty == 0){
 						this.beauty = 1;
-						
 					}
+					else if(this.beauty == 1){
+						this.beauty = 0;
+					}
+					this.isBeautify = !this.isBeautify;
+				},
+				
+				//切换美白0/1，并切换class
+				beWhite:function(){
+					if(this.whiteness == 0){
+						this.whiteness = 1;
+					}
+					else if(this.whiteness == 1){
+						this.whiteness = 0;
+					}
+					this.isWhite = !this.isWhite;
 				}
 				
                     
@@ -138,18 +169,25 @@
 		width: 750rpx;
 		
 	}
+	.sets{
+		position: absolute;
+		top: 130px;
+		right: 20rpx;
+	}
 	.set-item{
-		
+		margin-bottom: 13px;
 	}
 	.set-img{
 		width: 50rpx;
 		height: 50rpx;
-		
 	}
-	.img-1{
-		
+	.img-3{
+		width: 55rpx;
+		height: 55rpx;
 	}
-	.img-2{
-		
+	.set-title{
+		color: #ffffff;
+		font-size: 14px;
 	}
+
 </style>

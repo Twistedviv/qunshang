@@ -32,8 +32,6 @@
 </template>
 
 <script>
-
-	import store from "../../store/store.js"
 	
 	export default {
 		data:{
@@ -69,8 +67,8 @@
 			currentVideoId:currentSwiperIndex => currentSwiperIndex.toString(),
 		},
 		created:function(){
-			store.commit('getWindowsHeight')
-			this.windowHeight = store.state.windowHeight
+			this.$store.commit('getWindowsHeight')
+			this.windowHeight = this.$store.state.windowHeight
 			console.log("created!当前页面"+this.windowHeight)
 		},
 		onShow:function(){
