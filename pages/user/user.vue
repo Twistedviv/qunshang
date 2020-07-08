@@ -92,7 +92,7 @@
 		width: 50rpx;
 		height: 50rpx;
 		border-radius: 50% 50%;
-		background: url(../../static/img/arrow-left2.png) no-repeat rgb(251,212,181);
+		background: url(../../static/img/common/arrow-left2.png) no-repeat rgb(251,212,181);
 		background-position: 30% 50%;
 	}
 	.header-setting{
@@ -101,7 +101,7 @@
 		width: 50rpx;
 		height: 50rpx;
 		border-radius: 50% 50%;
-		background: url(../../static/img/points.png) no-repeat rgb(251,212,181);
+		background: url(../../static/img/common/points.png) no-repeat rgb(251,212,181);
 		background-position: 50% 50%;
 	}
 	
@@ -176,7 +176,7 @@
 	.content-top-user-right-top-select{
 		width: 56rpx;
 		height: 56rpx;
-		background: url(../../static/img/play.png) no-repeat;
+		background: url(../../static/img/common/play.png) no-repeat;
 		background-size: 50% 50%;
 		background-color: rgb(252,222,198);
 		background-position: 50% 50%;

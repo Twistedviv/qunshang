@@ -8,7 +8,10 @@
 			<view class="top-item" id="top-item3">与我相关</view>
 		</view>
 		<view class="content">
-			<view class="list"></view>
+			<view class="list">
+				<navigator url="../live/live-push">录制直播</navigator>
+				<navigator url="../live/live">看直播</navigator>
+			</view>
 		</view>
 	</view>
 </template>

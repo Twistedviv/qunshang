@@ -89,8 +89,10 @@
 				this.Video.stop()
 				this.currentSwiperIndex = event.detail.current
 				console.log(this.currentSwiperIndex)
-				this.Video = uni.createVideoContext('video'+this.currentSwiperIndex,this)
-				this.Video.play()
+				
+				//用autoplay取代了以下
+				// this.Video = uni.createVideoContext('video'+this.currentSwiperIndex,this)
+				// this.Video.play()
 				
 			},
 			//点击Item时，判断当前状态，决定暂停还是播放

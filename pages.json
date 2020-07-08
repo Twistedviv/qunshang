@@ -3,15 +3,25 @@
         {
             "path" : "pages/index/index",
             "style" : {
+				"navigationStyle":"default",
         		"navigationBarTitleText":"首页",
         		"navigationBarShadow":{
         			"colorType":"grey"
         		},
+				"app-plus":{
+					"titleNView":{
+						"buttons":[{
+							"text":"\ue61d",
+							"fontSrc":"/static/img/index/iconfont.ttf",
+							"fontSize":"22px",
+							"float":"right",
+							"width":"50px"
+						}]
+					}
+				},
 				"navigationBarTextStyle": "black",
 				"navigationBarBackgroundColor": "#F8F8F8",
-				"backgroundColor": "#F8F8F8",
-				"navigationStyle":"default"
-        		
+				"backgroundColor": "#F8F8F8"		
         	}
         },{
             "path": "pages/login/login",
@@ -32,6 +42,9 @@
             "path" : "pages/live/live",
             "style" : {}
         }, {
+            "path" : "pages/live/live-push",
+            "style" : {}
+        },{
             "path" : "pages/short-video/short-video",
             "style" : {
 				"navigationStyle":"custom"

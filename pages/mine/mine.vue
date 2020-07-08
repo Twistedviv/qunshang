@@ -11,7 +11,7 @@
 					<view class="drawer-item" id="drawer-item4">我的流量池</view>
 					<view class="drawer-item" id="drawer-item5">消息设置</view>
 					<view class="drawer-item" id="drawer-item6">商家服务中心</view>
-					<view class="drawer-item" id="drawer-item7">退出账号</view>
+					<view class="drawer-item" id="drawer-item7" @click="exit">退出账号</view>
 				</view>
 			</uni-drawer>
 		</view>
@@ -73,17 +73,58 @@
 		data() {
 			return {
 				
+				
 			}
 		},
 		components:{
 			uniDrawer
 		},
 		methods: {
-			back:function(){
+			back(){
 				uni.navigateBack({});
 			},
-			setting:function(){
+			setting(){
 				this.$refs['drawer'].open();
+			},
+			//退出
+			exit(){
+				let _this = this;
+				uni.showModal({
+					title:"退出",
+					conten:"是否确认退出",
+					success:function(res){
+						console.log(res);
+						if(res.confirm==true){
+							console.log("用户点击确认退出");
+							try{
+								uni.removeStorage({
+									key:"userInfo",
+									success:function(){
+										_this.$store.commit("setUserData",{});
+										console.log("成功移除userInfo");
+										uni.reLaunch({
+											url:"../login/login",
+											success:function(res){
+												console.log("重定向至登录页面");
+											},
+											fail:function(e){
+												console.log("重定向失败："+e);
+											}
+										})
+									},
+									fail:function(e){
+										console.log("移除失败:"+e);
+									}
+								})
+							}catch(e){
+								console.log("removing catch:"+e);
+							}
+						}else if (res.cancel==true){
+							console.log("用户点击取消退出");
+							return;
+						}
+					},
+				})
 			}
 		}
 	}
@@ -108,7 +149,7 @@
 		width: 50rpx;
 		height: 50rpx;
 		border-radius: 50% 50%;
-		background: url(../../static/img/arrow-left2.png) no-repeat rgb(78,205,252);
+		background: url(../../static/img/common/arrow-left2.png) no-repeat rgb(78,205,252);
 		background-position: 30% 50%;
 	}
 	.header-setting{
@@ -117,7 +158,7 @@
 		width: 50rpx;
 		height: 50rpx;
 		border-radius: 50% 50%;
-		background: url(../../static/img/points.png) no-repeat rgb(78,205,252);
+		background: url(../../static/img/common/points.png) no-repeat rgb(78,205,252);
 		background-position: 50% 50%;
 	}
 	.drawer-item{
@@ -198,8 +239,6 @@
 		border-radius: 50%;
 		background: url(http://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20190115/87868f21befc4e7f9007aa71efa79621.jpeg) no-repeat;
 		background-size: 100%;
-		
-	
 	}
 	.content-top-user-left-name{
 		width: 140rpx;
@@ -233,7 +272,7 @@
 	.content-top-user-right-top-select{
 		width: 56rpx;
 		height: 56rpx;
-		background: url(../../static/img/play.png) no-repeat;
+		background: url(../../static/img/common/play.png) no-repeat;
 		background-size: 50% 50%;
 		background-color: rgb(255, 255, 255);
 		background-position: 50% 50%;
