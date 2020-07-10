@@ -56,7 +56,7 @@
 				user:JSON.stringify(this.$store.state.userInfo),
 				findList:[
 					{
-						postsrc
+					
 					}
 				]
 			}

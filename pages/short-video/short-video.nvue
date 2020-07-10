@@ -1,6 +1,6 @@
 <template>
 	<view class="container">
-		<swiper vertical="true"  @change="changeSwiperItem" :style="{height:windowHeight+'px'}" class="swiper" >
+		<swiper vertical="true"  @change="changeSwiperItem" :style="{height:windowsHeight+'px'}" class="swiper" >
 			<swiper-item v-for="(videoItem,index) in videoList" :key="index" class="swiper-item">
 			
 				<video @tap="tapVideo" :src="videoItem.src" :id="'video'+index" v-if="index==currentSwiperIndex" :autoplay="true" :loop="true" :style="{height:windowHeight+'px'}" controls="false" class="video">
@@ -61,15 +61,15 @@
 			],
 			currentSwiperIndex:0,  //当前Item下标
 			currentSwiperState:true,  //当前Item的播放状态：true为播放，false为暂停
-			windowHeight:100
+			windowsHeight:100
 		},
 		computed:{
 			currentVideoId:currentSwiperIndex => currentSwiperIndex.toString(),
 		},
 		created:function(){
 			this.$store.commit('getWindowsHeight')
-			this.windowHeight = this.$store.state.windowHeight
-			console.log("created!当前页面"+this.windowHeight)
+			this.windowsHeight = this.$store.state.windowsHeight
+			console.log("created!当前页面"+this.windowsHeight)
 		},
 		onShow:function(){
 			this.Video = uni.createVideoContext("video"+this.currentSwiperIndex,this)

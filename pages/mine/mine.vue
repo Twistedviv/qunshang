@@ -98,7 +98,7 @@
 							console.log("用户点击确认退出");
 							try{
 								uni.removeStorage({
-									key:"userInfo",
+									key:"userData",
 									success:function(){
 										_this.$store.commit("setUserData",{});
 										console.log("成功移除userInfo");
@@ -113,7 +113,7 @@
 										})
 									},
 									fail:function(e){
-										console.log("移除失败:"+e);
+										console.log("移除失败:"+JSON.stringify(e));
 									}
 								})
 							}catch(e){
