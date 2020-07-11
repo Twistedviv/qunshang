@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<video src="rtmp://192.168.1.30/rtmplive" controls></video>
+		<video src="rtmp://212.129.235.182:1935/live/2020" controls="false"></video>
 	</view>
 </template>
 

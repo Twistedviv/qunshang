@@ -3,7 +3,7 @@
 		<swiper vertical="true"  @change="changeSwiperItem" :style="{height:windowsHeight+'px'}" class="swiper" >
 			<swiper-item v-for="(videoItem,index) in videoList" :key="index" class="swiper-item">
 			
-				<video @tap="tapVideo" :src="videoItem.src" :id="'video'+index" v-if="index==currentSwiperIndex" :autoplay="true" :loop="true" :style="{height:windowHeight+'px'}" controls="false" class="video">
+				<video @tap="tapVideo" :src="videoItem.src" :id="'video'+index" v-if="index==currentSwiperIndex" :autoplay="true" :loop="true" :style="{height:windowsHeight+'px'}" controls="false" class="video">
 					
 					<cover-view class="cover-view-container">
 						

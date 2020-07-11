@@ -73,6 +73,7 @@
         sum+=会费激励[i];
     }
 
+	if(过期) count、judgecount = 0；
 ## 行为积分算法
 
 ### 

@@ -1,8 +1,8 @@
 <template>
 	<view>
-		<live-pusher id='livePusher' ref="livePusher" class="livePusher" url="rtmp://192.168.1.30/rtmplive"
+		<live-pusher id='livePusher' ref="livePusher" class="livePusher" url="rtmp://212.129.235.182:1935/live/2020"
 		        mode="SD" :muted="false" :enable-camera="true" :auto-focus="true" :beauty="beauty" :whiteness="whiteness"
-		        aspect="9:16" :style="{height:windowHeight+'px'}" @statechange="statechange" @netstatus="netstatus" @error = "error">
+		        aspect="9:16" :style="{height:windowsHeight+'px'}" @statechange="statechange" @netstatus="netstatus" @error = "error">
 		</live-pusher>
 		<cover-view class="sets">
 			<cover-view class="set-item" @click="switchCamera">
@@ -35,7 +35,7 @@
     export default {
         data: {
              fil: true,
-			 windowHeight:100,
+			 windowsHeight:100,
 			 beauty:0,	//美颜
 			 whiteness:0  ,//美白
 			 isBeautify:false,
@@ -60,8 +60,8 @@
         },
 		onShow() {
 			store.commit('getWindowsHeight')
-			this.windowHeight = store.state.windowHeight
-			console.log("created!当前页面"+this.windowHeight)
+			this.windowsHeight = store.state.windowsHeight
+			console.log("created!当前页面"+this.windowsHeight)
 		},
         methods: {
 				statechange(e) {

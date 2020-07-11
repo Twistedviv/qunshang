@@ -66,7 +66,7 @@
 			getLogin(){
 			
 				uni.request({
-					url:"http://192.168.1.23/qunshangPHP/login.php",
+					url:"http://212.129.235.182:80/login.php",
 					method:"POST",
 					data:{
 						phoneData:this.phoneData,

@@ -162,7 +162,7 @@
 					_this.isRotate=false
 				},3000)
 				uni.request({
-					url:"http://192.168.1.23:80/qunshangPHP/register.php",
+					url:"http://212.129.235.182:80/register.php",
 					method:"POST",
 					data:{
 						phoneData:this.phoneData,
