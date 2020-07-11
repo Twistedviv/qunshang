@@ -2,7 +2,7 @@
 	<view>
 		<live-pusher id='livePusher' ref="livePusher" class="livePusher" url="rtmp://212.129.235.182:1935/live/2020"
 		        mode="SD" :muted="false" :enable-camera="true" :auto-focus="true" :beauty="beauty" :whiteness="whiteness"
-		        aspect="9:16" :style="{height:windowsHeight+'px'}" @statechange="statechange" @netstatus="netstatus" @error = "error">
+		        aspect="9:16" :style="{height:this.$store.state.windowsHeight+'px'}" @statechange="statechange" @netstatus="netstatus" @error = "error">
 		</live-pusher>
 		<cover-view class="sets">
 			<cover-view class="set-item" @click="switchCamera">
@@ -30,17 +30,13 @@
 </template>
 
 <script>
-	import store from "../../store/store.js";
-	
     export default {
         data: {
              fil: true,
-			 windowsHeight:100,
 			 beauty:0,	//美颜
 			 whiteness:0  ,//美白
 			 isBeautify:false,
-			 isWhite:false,
-			 
+			 isWhite:false,	 
         },
 		computed:{
 			beautySrc:function(){
@@ -55,14 +51,11 @@
 			}
 		},
         onReady() {
-             // 注意：需要在onReady中 或 onLoad 延时
-                        this.context = uni.createLivePusherContext("livePusher", this);
+            // 注意：需要在onReady中 或 onLoad 延时
+            this.context = uni.createLivePusherContext("livePusher", this);
+			this.$store.commit('getWindowsHeight');
+			console.log("当前页面高度"+this.$store.state.windowsHeight);
         },
-		onShow() {
-			store.commit('getWindowsHeight')
-			this.windowsHeight = store.state.windowsHeight
-			console.log("created!当前页面"+this.windowsHeight)
-		},
         methods: {
 				statechange(e) {
 				    console.log("statechange:" + JSON.stringify(e));

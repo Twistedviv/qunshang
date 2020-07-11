@@ -1,9 +1,10 @@
 <template>
 	<view class="container">
-		<swiper vertical="true"  @change="changeSwiperItem" :style="{height:windowsHeight+'px'}" class="swiper" >
+		 <view :style="{ height: this.$store.state.iStatusBarHeight + 'px'}" class="statusBar"></view>
+		<swiper vertical="true"  @change="changeSwiperItem" :style="{height:videoHeight+'px'}" class="swiper" >
 			<swiper-item v-for="(videoItem,index) in videoList" :key="index" class="swiper-item">
 			
-				<video @tap="tapVideo" :src="videoItem.src" :id="'video'+index" v-if="index==currentSwiperIndex" :autoplay="true" :loop="true" :style="{height:windowsHeight+'px'}" controls="false" class="video">
+				<video @tap="tapVideo" :src="videoItem.src" :poster="videoItem.posterSrc" :style="{height:videoHeight+'px'}" :id="'video'+index" v-if="index==currentSwiperIndex" :autoplay="true" :loop="true" controls="false" class="video">
 					
 					<cover-view class="cover-view-container">
 						
@@ -37,39 +38,54 @@
 		data:{
 			videoList:[
 			{
-				src:"https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200fc80000brcq4qpevctv7pnq6thg&ratio=720p&line=0"
+				src:"https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200fc80000brcq4qpevctv7pnq6thg&ratio=720p&line=0",
+				posterSrc:"https://p9-dy.byteimg.com/img/tos-cn-p-0015/1805c9ca6dd8497eb37159c3c9faf5f6~c5_300x400.jpeg?from=2563711402_large"
+				
 			},
 			{
-				src:"https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200fe70000bquvmisthbi0h53ah6d0&ratio=720p&line=0"
+				src:"https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200fe70000bquvmisthbi0h53ah6d0&ratio=720p&line=0",
+				posterSrc:"https://p6-dy-ipv6.byteimg.com/img/tos-cn-p-0015/3a4b743cf25a404da6cb2a159b0b8a9d~c5_300x400.jpeg?from=2563711402_large"
 			},
 			{
-				src:"https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200f5c0000bru6m13pqv6apkc3cke0&ratio=720p&line=0"
+				src:"https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200f5c0000bru6m13pqv6apkc3cke0&ratio=720p&line=0",
+				posterSrc:"https://p3-dy.byteimg.com/img/tos-cn-p-0015/1939bd44c2a246538be941193d8f360b~c5_300x400.jpeg?from=2563711402_large"
 			},
 			{
-				src:"https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200f4f0000brrbntdahtm68pamna30&ratio=720p&line=0"
+				src:"https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200f4f0000brrbntdahtm68pamna30&ratio=720p&line=0",
+				posterSrc:"https://p3-dy.byteimg.com/img/tos-cn-p-0015/2a162ac9461e4f068ca85b444afaf214_1593228282~c5_300x400.jpeg?from=2563711402_large"
 			},
 			{
-				src:"https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200f7f0000brq6mkkmavf54vk2get0&ratio=720p&line=0"
+				src:"https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200f7f0000brq6mkkmavf54vk2get0&ratio=720p&line=0",
+				posterSrc:"https://p29-dy.byteimg.com/img/tos-cn-p-0015/bc140896d4cc4c44bb05a5409edcf874~c5_300x400.jpeg?from=2563711402_large"
 			},
 			{
-				src:"https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200f3c0000bruns0l9688i25vnv0hg&ratio=720p&line=0"
+				src:"https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200f3c0000bruns0l9688i25vnv0hg&ratio=720p&line=0",
+				posterSrc:"https://p3-dy.byteimg.com/img/tos-cn-p-0015/ce6ac3088eb84b509cb532bdfdcb892f~c5_300x400.jpeg?from=2563711402_large"
 			},
 			{
-				src:"https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200f090000brtuno32ap943039khmg&ratio=720p&line=0"
-					
+				src:"https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200f090000brtuno32ap943039khmg&ratio=720p&line=0",
+				posterSrc:"https://p9-dy.byteimg.com/img/tos-cn-p-0015/612c71d71a6b4d838aba339b0ce2602f_1593568307~c5_300x400.jpeg?from=2563711402_large"	
 			}
 			],
 			currentSwiperIndex:0,  //当前Item下标
 			currentSwiperState:true,  //当前Item的播放状态：true为播放，false为暂停
-			windowsHeight:100
 		},
 		computed:{
-			currentVideoId:currentSwiperIndex => currentSwiperIndex.toString(),
+			currentVideoId:function(currentSwiperIndex){
+				return currentSwiperIndex.toString();
+			},
+			//计算视频窗口高度
+			videoHeight:function(){
+				return this.$store.state.windowsHeight - this.$store.state.iStatusBarHeight;
+			}
 		},
-		created:function(){
-			this.$store.commit('getWindowsHeight')
-			this.windowsHeight = this.$store.state.windowsHeight
-			console.log("created!当前页面"+this.windowsHeight)
+		//更新窗口高度和状态栏高度
+		onReady() {
+			this.$store.commit('getWindowsHeight');
+			this.$store.commit('getStatusBarHeight');
+		},
+		onLoad:function(){
+			 this.iStatusBarHeight = uni.getSystemInfoSync().statusBarHeight;
 		},
 		onShow:function(){
 			this.Video = uni.createVideoContext("video"+this.currentSwiperIndex,this)
@@ -110,6 +126,9 @@
 </script>
 
 <style>
+	.statusBar{
+		background-color: #000000;
+	}
 	.swiper{
 		flex-direction: column;
 		flex-wrap: wrap;

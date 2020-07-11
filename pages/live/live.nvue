@@ -1,16 +1,38 @@
 <template>
 	<view>
-		<video src="rtmp://212.129.235.182:1935/live/2020" controls="false"></video>
+		<view :style="{ height: this.$store.state.iStatusBarHeight + 'px'}" class="statusBar"></view>
+		<video src="rtmp://212.129.235.182:1935/live/2020" :autoplay="true" :style="{height:videoHeight+'px'}" :controls="false" >
+			<view class="top">
+				<view class="master">
+					<view class="head-img"></view>
+					<view class="name"></view>
+				</view>
+				<view class="userlist"></view>
+				<view class="set"></view>
+			</view>
+			<view class="bottom">
+				<view class="comment"></view>
+				<view class="shop"></view>
+				<view class="gift"></view>
+				<view class="exit"></view>
+			</view>
+		</video>
 	</view>
 </template>
 
 <script>
     export default {
         data: {
-           
+
         },
+		computed:{
+			videoHeight:function(){
+				return this.$store.state.windowsHeight - this.$store.state.iStatusBarHeight;
+			}
+		},
         onReady() {
-            
+            this.$store.commit('getWindowsHeight');
+			this.$store.commit('getStatusBarHeight');
         },
         methods: {
             
@@ -19,5 +41,26 @@
 </script>
 
 <style>
-
+	.top{
+		width: 750rpx;
+		height: 50px;
+		padding: 0 20rpx;
+		background-color: #007AFF;
+		flex-direction: row;
+	}
+	.master{
+		width: 250rpx;
+		height: 100%;
+		background-color: #24292E;
+	}
+	.userlist{
+		width: 350rpx;
+		height: 100%;
+		background-color: #ffaa7f;
+	}
+	.set{
+		width: 150rpx;
+		height: 100%;
+		background-color: #ff557f;
+	}
 </style>

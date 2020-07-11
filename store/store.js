@@ -8,17 +8,21 @@ const store = new Vuex.Store({
 		userInfo:{
 			userPhone:""
 		},
-		windowsHeight:100
+		windowsHeight:100,
+		iStatusBarHeight:0
 	},
 	mutations: {
 		increment(state) {
-			state.count++
+			state.count++;
 		},
 		getWindowsHeight(state){
-			state.windowsHeight = uni.getSystemInfoSync().windowHeight
+			state.windowsHeight = uni.getSystemInfoSync().windowHeight;
+		},
+		getStatusBarHeight(state){
+			state.iStatusBarHeight = uni.getSystemInfoSync().statusBarHeight;
 		},
 		setUserData(state,value){
-			state.userInfo.userPhone = value.phoneData
+			state.userInfo.userPhone = value.phoneData;
 		}
 		
 	},

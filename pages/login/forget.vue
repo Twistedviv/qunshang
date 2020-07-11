@@ -26,7 +26,7 @@
 					placeholder="验证码"
 					
 					isShowCode
-					codeText="获取重置码"
+					codeText="获取验证码"
 					setTime="30"
 					ref="runCode"
 					@setCode="getVerCode()"
@@ -77,16 +77,12 @@
 				this.$refs.runCode.$emit('runCode'); //触发倒计时（一般用于请求成功验证码后调用）
 				uni.showToast({
 				    icon: 'none',
-				    title: '模拟倒计时触发'
+				    title: '验证码已发送'
 				});
 				
 				setTimeout(function(){
 					_this.$refs.runCode.$emit('runCode',0); //假装模拟下需要 终止倒计时
-					uni.showToast({
-					    icon: 'none',
-					    title: '模拟倒计时终止'
-					});
-				},3000)
+				},30000)
 			},
 			startRePass() {
 				//重置密码
