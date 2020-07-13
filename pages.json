@@ -92,6 +92,54 @@
 				"navigationStyle":"default"
 			}
         }
+        ,{
+            "path" : "pages/message/add/add",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/message/new/new",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/message/relative/relative",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/mine/QRcode/QRcode",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/mine/order/order",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/mine/pool/pool",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/mine/seller/seller",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/mine/notice/notice",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/index/draw/draw",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/index/sign/sign",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/index/group/group",
+            "style" : {}
+        }
+        ,{
+            "path" : "pages/mine/edit/edit",
+            "style" : {}
+        }
     ],
     "globalStyle": {
 		"navigationStyle":"custom"

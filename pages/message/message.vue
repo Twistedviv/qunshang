@@ -1,11 +1,11 @@
 <template>
 	<view>
 		<view class="top">
-			<view class="top-item" id="top-item1">添加好友</view>
+			<view class="top-item" id="top-item1" @click="toItem1">添加好友</view>
 			
-			<view class="top-item" id="top-item2">新增粉丝</view>
+			<view class="top-item" id="top-item2" @click="toItem2">新增粉丝</view>
 			
-			<view class="top-item" id="top-item3">与我相关</view>
+			<view class="top-item" id="top-item3" @click="toItem3">与我相关</view>
 		</view>
 		<view class="content">
 			<view class="list">
@@ -24,7 +24,21 @@
 			}
 		},
 		methods: {
-			
+			toItem1(){
+				uni.navigateTo({
+					url:"add/add"
+				})
+			},
+			toItem2(){
+				uni.navigateTo({
+					url:"new/new"
+				})
+			},
+			toItem3(){
+				uni.navigateTo({
+					url:"relative/relative"
+				})
+			},
 		}
 	}
 </script>

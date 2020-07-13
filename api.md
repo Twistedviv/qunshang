@@ -74,6 +74,33 @@
     }
 
 	if(过期) count、judgecount = 0；
+	
+	
+### 平台收益结算
+	//when 确认收货时间+7天后
+	
+	//计算平台收益
+	profit = actualPay * returnBili
+	
+	//找出三个受益的群商
+	while(ans<3){
+	    if (身份>=群商){
+	        s.append(id);
+	        ans++;
+	    }
+	    if (上一个邀请人！=0) tmp=上个邀请人id
+	    else break;
+	}
+	
+	//找出受益群主
+	while(身份!=群主){
+		 id = 上一个邀请人id；
+	}
+
+	//插入数据表
+	insert 平台收益表 从订单号 群商id 邀请人数组[012] 群主id
+
+
 ## 行为积分算法
 
 ### 

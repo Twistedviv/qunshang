@@ -5,13 +5,13 @@
 			<view class="header-setting" @click="setting"></view>
 			<uni-drawer mode="right" ref="drawer">
 				<view style="padding:30rpx;">
-					<view class="drawer-item" id="drawer-item1">设 置</view>
-					<view class="drawer-item" id="drawer-item2">我的二维码</view>
-					<view class="drawer-item" id="drawer-item3">我的订单</view>
-					<view class="drawer-item" id="drawer-item4">我的流量池</view>
-					<view class="drawer-item" id="drawer-item5">消息设置</view>
-					<view class="drawer-item" id="drawer-item6">商家服务中心</view>
-					<view class="drawer-item" id="drawer-item7" @click="exit">退出账号</view>
+					<view class="drawer-item" id="drawer-title">设 置</view>
+					<view class="drawer-item" id="drawer-item1" @click="QRcode">我的二维码</view>
+					<view class="drawer-item" id="drawer-item2" @click="order">我的订单</view>
+					<view class="drawer-item" id="drawer-item3" @click="pool">我的流量池</view>
+					<view class="drawer-item" id="drawer-item4" @click="notice">消息设置</view>
+					<view class="drawer-item" id="drawer-item5" @click="seller">商家服务中心</view>
+					<view class="drawer-item" id="drawer-item6" @click="exit">退出账号</view>
 				</view>
 			</uni-drawer>
 		</view>
@@ -31,7 +31,7 @@
 					</view>
 					<view class="content-top-user-right">
 						<view class="content-top-user-right-top">
-							<view class="content-top-user-right-top-follow">
+							<view class="content-top-user-right-top-edit" @click="edit">
 								编辑资料
 							</view>
 							<view class="content-top-user-right-top-select"></view>
@@ -85,6 +85,36 @@
 			},
 			setting(){
 				this.$refs['drawer'].open();
+			},
+			edit(){
+				uni.navigateTo({
+					url:"edit/edit"
+				})
+			},
+			QRcode(){
+				uni.navigateTo({
+					url:"QRcode/QRcode"
+				})
+			},
+			order(){
+				uni.navigateTo({
+					url:"order/order"
+				})
+			},
+			pool(){
+				uni.navigateTo({
+					url:"pool/pool"
+				})
+			},
+			notice(){
+				uni.navigateTo({
+					url:"notice/notice"
+				})
+			},
+			seller(){
+				uni.navigateTo({
+					url:"seller/seller"
+				})
 			},
 			//退出
 			exit(){
@@ -174,29 +204,29 @@
 		background-position: 17% 50%;
 		margin-bottom: 5px;
 	}
-	#drawer-item1{
+	#drawer-title{
 		font-size: 22px;
 		font-weight: bold;
 		text-indent: 0;
 		text-align: center;
 		color: #444444;
 	}
-	#drawer-item2{
+	#drawer-item1{
 		background-image: url(../../static/img/mine/qrcode.png);
 	}
-	#drawer-item3{
+	#drawer-item2{
 		background-image: url(../../static/img/mine/order.png);
 	}
-	#drawer-item4{
+	#drawer-item3{
 		background-image: url(../../static/img/mine/data.png);
 	}
-	#drawer-item5{
+	#drawer-item4{
 		background-image: url(../../static/img/mine/notice.png);
 	}
-	#drawer-item6{
+	#drawer-item5{
 		background-image: url(../../static/img/mine/zhuye.png);
 	}
-	#drawer-item7{
+	#drawer-item6{
 		background-image: url(../../static/img/mine/exit.png);
 	}
 	/* -----------------------------content----------------------------*/
@@ -260,7 +290,7 @@
 		flex-direction: row;
 		padding-top: 35rpx;
 	}
-	.content-top-user-right-top-follow{
+	.content-top-user-right-top-edit{
 		width: 250rpx;
 		height: 56rpx;
 		font-size: 16px;
