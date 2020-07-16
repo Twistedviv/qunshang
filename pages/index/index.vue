@@ -158,12 +158,17 @@
 		},
 		methods: {
 			onNavigationBarButtonTap() {
+				let _this = this;
 				console.log("tap scan!");
 				uni.scanCode({
 					success: function(res) {
 						console.log("scan success!");
 						console.log("内容为：" + res.result);
+						if(res.result)
 						console.log("路径为：" + res.path);
+						uni.request({
+							url:"app后端扫码登录接口?token="+res.result+"&uid="+_this.$store.state.userInfo.uid
+						})
 					}
 				})
 			},

@@ -81,14 +81,11 @@
 						if(res.data.statusCode == 1){
 							console.log("status==1！\r")
 							//用户数据赋值
-							let userdata={
-								"phoneData":_this.phoneData,
-								/*"nickname":res.data.nickname,*/
-								/*"accesstoken":res.data.accesstoken,*/
-							} //保存用户信息和accesstoken
-							_this.$store.dispatch("setUserData",userdata); //存入状态
+							let userInfo = res.data.userInfo;
+							//保存用户信息和accesstoken
+							_this.$store.dispatch("setUserInfo",userInfo); //存入Vuex状态
 							try {
-								uni.setStorageSync('userData', userdata); //存入缓存
+								uni.setStorageSync('userInfo', userInfo); //存入缓存
 							} catch (e) {
 								// error
 								console.log("存入本地数据出错",e);

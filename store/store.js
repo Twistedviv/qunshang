@@ -5,9 +5,7 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
 	state: {
-		userInfo:{
-			userPhone:""
-		},
+		userInfo:{},
 		windowsHeight:100,
 		iStatusBarHeight:0
 	},
@@ -21,14 +19,14 @@ const store = new Vuex.Store({
 		getStatusBarHeight(state){
 			state.iStatusBarHeight = uni.getSystemInfoSync().statusBarHeight;
 		},
-		setUserData(state,value){
-			state.userInfo.userPhone = value.phoneData;
+		setUserInfo(state,value){
+			state.userInfo = value;
 		}
 		
 	},
 	actions:{
-		setUserData(context,value){
-			context.commit('setUserData',value)
+		setUserInfo(context,value){
+			context.commit('setUseInfo',value)
 		}
 	}
 })

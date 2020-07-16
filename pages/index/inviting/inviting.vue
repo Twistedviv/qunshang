@@ -4,7 +4,9 @@
 			<swiper-item>
 				<view class="swiper-item item1" :style="{height:windowsHeight+'px'}">
 					<view class="title1">保存二维码发送给朋友扫码即可邀请</view>
-					<view id="qrcode"></view>
+					<view class="qrimg">
+						<tki-qrcode ref="qrcode" :val="val" :size="340"></tki-qrcode>
+					</view>
 				</view>
 			</swiper-item>
 			<swiper-item>
@@ -18,16 +20,18 @@
 </template>
 
 <script>
-	import QRCode from "qrcodejs2"
+	import  tkiQrcode from "@/components/tki-qrcode/tki-qrcode.vue"
 	export default {
 		data() {
 			return {
 				windowsHeight:100,
 				qrcodeSrc:"",
-				url:""
+				val:"http://www.baidu.com"
 			}
 		},
-		
+		components:{
+			tkiQrcode
+		},
 		created:function() {
 			this.$store.commit('getWindowsHeight');
 			this.windowsHeight = this.$store.state.windowsHeight;
@@ -44,7 +48,7 @@
 			// this.url = 
 		},
 		mounted() {
-			this.init();
+			this.$refs.qrcode._makeCode();
 		},
 		methods: {
 			
@@ -67,16 +71,6 @@
 							title:"链接已复制到剪贴板"
 						})
 					}
-				})
-			},
-			init(){
-				var _this = this;
-				this.qrcode = new QRCode('qrcode',{
-					width:180,
-					height:180,
-					text:"http://www.baidu.com?yaoqinma=123164654",
-					colorDark:'#000',
-					colorLight:'#fff'
 				})
 			}
 		}
@@ -103,7 +97,7 @@
 		top:22%;
 	
 	}
-	#qrcode{
+	.qrimg{
 		width: 350rpx;
 		height: 350rpx;
 		position: absolute;
