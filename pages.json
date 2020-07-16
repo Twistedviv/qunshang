@@ -140,6 +140,10 @@
             "path" : "pages/mine/edit/edit",
             "style" : {}
         }
+        ,{
+            "path" : "pages/short-video/userPage/userPage",
+            "style" : {}
+        }
     ],
     "globalStyle": {
 		"navigationStyle":"custom"

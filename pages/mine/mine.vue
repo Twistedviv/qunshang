@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="header">
-			<view class="header-back" @click="back"></view>
+			<!-- <view class="header-back" @click="back"></view> -->
 			<view class="header-setting" @click="setting"></view>
 			<uni-drawer mode="right" ref="drawer">
 				<view style="padding:30rpx;">
@@ -46,7 +46,7 @@
 					<view class="content-top-list-item">商品橱窗</view>
 				</view>
 			</view>
-		<!-- 	<view class="content-bottom">
+			<view class="content-bottom">
 				<view class="content-bottom-content">
 					<view class="content-bottom-content-item">
 						
@@ -62,7 +62,7 @@
 					</view>
 					
 				</view>
-			</view> -->
+			</view>
 		</view>
 	</view>
 </template>
@@ -169,11 +169,8 @@
 		width: 750rpx;
 		height: 135px;
 		background-color: rgb(172,232,254);
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
 	}
-	.header-back{
+/* 	.header-back{
 		margin-top: 50px;
 		margin-left: 35rpx;
 		width: 50rpx;
@@ -181,8 +178,9 @@
 		border-radius: 50% 50%;
 		background: url(../../static/img/common/arrow-left2.png) no-repeat rgb(78,205,252);
 		background-position: 30% 50%;
-	}
+	} */
 	.header-setting{
+		float: right;
 		margin-top: 50px;
 		margin-right: 35rpx;
 		width: 50rpx;

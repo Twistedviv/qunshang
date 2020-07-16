@@ -4,7 +4,7 @@
 			<swiper-item>
 				<view class="swiper-item item1" :style="{height:windowsHeight+'px'}">
 					<view class="title1">保存二维码发送给朋友扫码即可邀请</view>
-					<view class="qrcode"></view>
+					<view id="qrcode"></view>
 				</view>
 			</swiper-item>
 			<swiper-item>
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-	
+	import QRCode from "qrcodejs2"
 	export default {
 		data() {
 			return {
@@ -27,6 +27,7 @@
 				url:""
 			}
 		},
+		
 		created:function() {
 			this.$store.commit('getWindowsHeight');
 			this.windowsHeight = this.$store.state.windowsHeight;
@@ -38,8 +39,12 @@
 					console.log("获取邀请二维码成功！本地路径为："+this.qrcodeSrc);
 				}
 			});
+			
 			//将请求到的url字符串
 			// this.url = 
+		},
+		mounted() {
+			this.init();
 		},
 		methods: {
 			
@@ -62,6 +67,16 @@
 							title:"链接已复制到剪贴板"
 						})
 					}
+				})
+			},
+			init(){
+				var _this = this;
+				this.qrcode = new QRCode('qrcode',{
+					width:180,
+					height:180,
+					text:"http://www.baidu.com?yaoqinma=123164654",
+					colorDark:'#000',
+					colorLight:'#fff'
 				})
 			}
 		}
@@ -88,10 +103,9 @@
 		top:22%;
 	
 	}
-	.qrcode{
+	#qrcode{
 		width: 350rpx;
 		height: 350rpx;
-		background-color: #007AFF;
 		position: absolute;
 		top:30%;
 		margin: 0 200rpx;

@@ -1,6 +1,5 @@
 <template>
 	<view class="register">
-		<view>{{identity}}</view>
 		<view class="content">
 			<!-- 头部logo -->
 			<view class="header">
@@ -22,9 +21,11 @@
 					isShowPass
 				></wInput>
 				
-				<wPicker :pick-array="['群主','主播','群商','会员','粉丝']" v-model="identity">	
+				<wPicker :pick-array="['粉丝','会员']" v-model="identity">	
 				</wPicker>
-				
+				<view class="notice">
+					<text>另附群商身份说明：</text><navigator url="">《招商广告》</navigator>
+				</view>
 				<wInput
 					v-model="verCode"
 					type="number"
@@ -142,7 +143,7 @@
 		            });
 		            return false;
 		        }
-				if (this.identity == "") {
+				if (this.identity === "") {
 				    uni.showToast({
 				        icon: 'none',
 				        title: '未选择身份'
@@ -211,4 +212,15 @@
 <style>
 	@import url("../../components/watch-login/css/icon.css");
 	@import url("./css/main.css");
+	.register{
+		font-size: 14px;
+	}
+	.notice{
+		display: flex;
+		flex-direction: row;
+		padding-left: 10px;
+	}
+	.notice navigator{
+		color: #007AFF;
+	}
 </style>

@@ -3,30 +3,37 @@
 		 <view :style="{ height: this.$store.state.iStatusBarHeight + 'px'}" class="statusBar"></view>
 		<swiper vertical="true"  @change="changeSwiperItem" :style="{height:videoHeight+'px'}" class="swiper" >
 			<swiper-item v-for="(videoItem,index) in videoList" :key="index" class="swiper-item">
-			
-				<video @tap="tapVideo" :src="videoItem.src" :poster="videoItem.posterSrc" :style="{height:videoHeight+'px'}" :id="'video'+index" v-if="index==currentSwiperIndex" :autoplay="true" :loop="true" controls="false" class="video">
-					
-					<cover-view class="cover-view-container">
-						
-						<cover-view class="cover-view-item">
-							<cover-image class="cover-image" src="../../static/img/short-video/heart.png"></cover-image>
-							<cover-view class="cover-view"><text class="cover-view-text">赞</text></cover-view>
-						</cover-view>
-						
-					
-						<cover-view class="cover-view-item">
-							<cover-image class="cover-image" src="../../static/img/short-video/ver-code.png"></cover-image>
-							<cover-view class="cover-view"><text class="cover-view-text">评论</text></cover-view>
-						</cover-view>
-						
-						<cover-view class="cover-view-item">
-							<cover-image class="cover-image" src="../../static/img/short-video/share.png"></cover-image>
-							<cover-view class="cover-view"><text class="cover-view-text">转发</text></cover-view>
-						</cover-view>
-					</cover-view>
+				<image class="poster" :src="videoItem.posterSrc" v-if="currentPoster"  mode="aspectFit" :style="{height:videoHeight+'px'}"></image>
+				<video @tap="tapVideo" @play="hidePoster" :src="videoItem.src" :style="{height:videoHeight+'px'}" objectFit="fill" :id="'video'+index" v-if="index==currentSwiperIndex" :autoplay="true" :loop="true" controls="false" class="video">
 				</video>
-			
+				<cover-view class="info" v-if="index==currentSwiperIndex">
+					<cover-view @click="toUserPage"><text class="name">@{{videoItem.name}}</text></cover-view>
+					<cover-view ><text class="intro">{{videoItem.intro}}</text></cover-view>
+					<cover-view ><text class="publishtime">发布于：{{videoItem.publishtime}}</text></cover-view>
+				</cover-view>
+				<cover-view class="cover-view-container" v-if="index==currentSwiperIndex">
+					
+					<cover-image class="headimg" :src="videoItem.headimg" @click="toUserPage">
+						<!-- 用相对定位做出突出效果 -->
+					</cover-image>
+					
+					
+					<cover-view class="cover-view-item">
+						<cover-image class="cover-image" src="../../static/img/short-video/heart.png"></cover-image>
+						<cover-view class="cover-view"><text class="cover-view-text">点赞</text></cover-view>
+					</cover-view>
+					
 				
+					<cover-view class="cover-view-item">
+						<cover-image class="cover-image" src="../../static/img/short-video/comment.png"></cover-image>
+						<cover-view class="cover-view"><text class="cover-view-text">评论</text></cover-view>
+					</cover-view>
+					
+					<cover-view class="cover-view-item">
+						<cover-image class="cover-image" src="../../static/img/short-video/share.png"></cover-image>
+						<cover-view class="cover-view"><text class="cover-view-text">转发</text></cover-view>
+					</cover-view>
+				</cover-view>
 			</swiper-item>
 		</swiper>
 	</view>
@@ -36,39 +43,74 @@
 	
 	export default {
 		data:{
-			videoList:[
-			{
-				src:"https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200fc80000brcq4qpevctv7pnq6thg&ratio=720p&line=0",
-				posterSrc:"https://p9-dy.byteimg.com/img/tos-cn-p-0015/1805c9ca6dd8497eb37159c3c9faf5f6~c5_300x400.jpeg?from=2563711402_large"
-				
-			},
-			{
-				src:"https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200fe70000bquvmisthbi0h53ah6d0&ratio=720p&line=0",
-				posterSrc:"https://p6-dy-ipv6.byteimg.com/img/tos-cn-p-0015/3a4b743cf25a404da6cb2a159b0b8a9d~c5_300x400.jpeg?from=2563711402_large"
-			},
-			{
-				src:"https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200f5c0000bru6m13pqv6apkc3cke0&ratio=720p&line=0",
-				posterSrc:"https://p3-dy.byteimg.com/img/tos-cn-p-0015/1939bd44c2a246538be941193d8f360b~c5_300x400.jpeg?from=2563711402_large"
-			},
-			{
-				src:"https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200f4f0000brrbntdahtm68pamna30&ratio=720p&line=0",
-				posterSrc:"https://p3-dy.byteimg.com/img/tos-cn-p-0015/2a162ac9461e4f068ca85b444afaf214_1593228282~c5_300x400.jpeg?from=2563711402_large"
-			},
-			{
-				src:"https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200f7f0000brq6mkkmavf54vk2get0&ratio=720p&line=0",
-				posterSrc:"https://p29-dy.byteimg.com/img/tos-cn-p-0015/bc140896d4cc4c44bb05a5409edcf874~c5_300x400.jpeg?from=2563711402_large"
-			},
-			{
-				src:"https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200f3c0000bruns0l9688i25vnv0hg&ratio=720p&line=0",
-				posterSrc:"https://p3-dy.byteimg.com/img/tos-cn-p-0015/ce6ac3088eb84b509cb532bdfdcb892f~c5_300x400.jpeg?from=2563711402_large"
-			},
-			{
-				src:"https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200f090000brtuno32ap943039khmg&ratio=720p&line=0",
-				posterSrc:"https://p9-dy.byteimg.com/img/tos-cn-p-0015/612c71d71a6b4d838aba339b0ce2602f_1593568307~c5_300x400.jpeg?from=2563711402_large"	
-			}
-			],
+			
+			videoList:[{
+						index:0,
+						src: "https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200fc80000brcq4qpevctv7pnq6thg&ratio=720p&line=0",
+						posterSrc: "https://p9-dy.byteimg.com/img/tos-cn-p-0015/1805c9ca6dd8497eb37159c3c9faf5f6~c5_300x400.jpeg?from=2563711402_large",
+						intro: "为什么学习？最佳是兴趣，最俗是一技之长",
+						name:"徐凤年",
+						publishtime:"07-10 22:13", 
+						headimg: "http://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20190115/87868f21befc4e7f9007aa71efa79621.jpeg"
+					},
+					{	
+						index:1,
+						src: "https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200fe70000bquvmisthbi0h53ah6d0&ratio=720p&line=0",
+						posterSrc: "https://p6-dy-ipv6.byteimg.com/img/tos-cn-p-0015/3a4b743cf25a404da6cb2a159b0b8a9d~c5_300x400.jpeg?from=2563711402_large",
+						intro: "终于知道铁丝网这么做的了",
+						name:"李淳罡",
+						publishtime:"07-10 22:13", 
+						headimg: "https://dss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=2714978353,1075402837&fm=111&gp=0.jpg"
+					},
+					{
+						index:2,
+						src: "https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200f5c0000bru6m13pqv6apkc3cke0&ratio=720p&line=0",
+						posterSrc: "https://p3-dy.byteimg.com/img/tos-cn-p-0015/1939bd44c2a246538be941193d8f360b~c5_300x400.jpeg?from=2563711402_large",
+						intro: "啤酒瓶升值计划",
+						name:"姜倪",
+						publishtime:"07-10 22:13", 
+						headimg: "http://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20190115/87868f21befc4e7f9007aa71efa79621.jpeg"
+					},
+					{
+						index:3,
+						src: "https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200f4f0000brrbntdahtm68pamna30&ratio=720p&line=0",
+						posterSrc: "https://p3-dy.byteimg.com/img/tos-cn-p-0015/2a162ac9461e4f068ca85b444afaf214_1593228282~c5_300x400.jpeg?from=2563711402_large",
+						intro: "小小年纪一挑二，面对大鹅真是毫无畏惧",
+						name:"吴龙骧",
+						publishtime:"07-10 22:13", 
+						headimg: "http://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20190115/87868f21befc4e7f9007aa71efa79621.jpeg"
+					},
+					{
+						index:4,
+						src: "https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200f7f0000brq6mkkmavf54vk2get0&ratio=720p&line=0",
+						posterSrc: "https://p29-dy.byteimg.com/img/tos-cn-p-0015/bc140896d4cc4c44bb05a5409edcf874~c5_300x400.jpeg?from=2563711402_large",
+						intro: "大家帮帮看看这是不是“土猫”",
+						name:"小黑老实人",
+						publishtime:"07-10 22:13", 
+						headimg: "http://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20190115/87868f21befc4e7f9007aa71efa79621.jpeg"
+					},
+					{
+						index:5,
+						src: "https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200f3c0000bruns0l9688i25vnv0hg&ratio=720p&line=0",
+						posterSrc: "https://p3-dy.byteimg.com/img/tos-cn-p-0015/ce6ac3088eb84b509cb532bdfdcb892f~c5_300x400.jpeg?from=2563711402_large",
+						intro: "他看起来很焦虑，自从有了可升降的防洪闸，他不知道洪水什么时候才能淹了他家。",
+						name:"千秋万代的李哥",
+						publishtime:"07-10 22:13", 
+						headimg: "http://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20190115/87868f21befc4e7f9007aa71efa79621.jpeg"
+					},
+					{
+						index:6,
+						src: "https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200f090000brtuno32ap943039khmg&ratio=720p&line=0",
+						posterSrc: "https://p9-dy.byteimg.com/img/tos-cn-p-0015/612c71d71a6b4d838aba339b0ce2602f_1593568307~c5_300x400.jpeg?from=2563711402_large",
+						intro: "老爸请长辈喝他埋藏多年的某儿红 可是这个意外来得太突然",
+						name:"一个玩劫的主播",
+						publishtime:"07-10 22:13", 
+						headimg: "http://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20190115/87868f21befc4e7f9007aa71efa79621.jpeg"
+					}
+				],
 			currentSwiperIndex:0,  //当前Item下标
 			currentSwiperState:true,  //当前Item的播放状态：true为播放，false为暂停
+			currentPoster:true
 		},
 		computed:{
 			currentVideoId:function(currentSwiperIndex){
@@ -103,6 +145,7 @@
 				this.Video.stop()
 				this.currentSwiperIndex = event.detail.current
 				console.log(this.currentSwiperIndex)
+				this.currentPoster = true
 				
 				//用autoplay取代了以下
 				// this.Video = uni.createVideoContext('video'+this.currentSwiperIndex,this)
@@ -120,6 +163,17 @@
 					this.Video.play()
 					this.currentSwiperState = true
 				}
+			},
+			hidePoster(){
+				let _this = this;
+				setTimeout(function(){
+					_this.currentPoster = false
+				},100)
+			},
+			toUserPage(){
+				uni.navigateTo({
+					url:"userPage/userPage"
+				})
 			}
 		}
 	}
@@ -133,21 +187,25 @@
 		flex-direction: column;
 		flex-wrap: wrap;
 	}
-	.swiper-item{
-		
-	}
 	.video{
 		position: relative;
 	}
 	.cover-view-container{
 		position: absolute;
 		flex-direction: column;
-		right: 20px;
-		bottom: 100px;
+		align-items: center;
+		right: 10px;
+		bottom: 110px;
+	}
+	.headimg{
+		width: 45px;
+		height: 45px;
+		border-radius: 50%;
+
 	}
 	.cover-view-item{
 		margin-top: 20px;
-		
+		align-items: center;
 	}
 	.cover-image{
 		width: 35px;
@@ -158,8 +216,28 @@
 	}
 	.cover-view-text{
 		font-size: 12px;
-		text-align: center;
+		color: #FFFFFF;	
+	}
+	.info{
+		width: 520rpx;
+		position: absolute;
+		left: 10px;
+		bottom: 20px;
+		flex-direction: column;
+		align-items: flex-start;
+	}
+	.name{
 		color: #FFFFFF;
-		
+		font-size: 18px;
+		font-weight: bold;
+	}
+	.intro{
+		color: #FFFFFF;
+		font-size: 16px;
+		margin: 10px 0;
+	}
+	.publishtime{
+		color: #FFFFFF;
+		font-size: 14px;
 	}
 </style>

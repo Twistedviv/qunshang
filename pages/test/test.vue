@@ -1,18 +1,33 @@
 <template>
 	<view>
-		
+		<view class="code">
+			<view id="qrcode"></view>
+		</view>
 	</view>
 </template>
 
 <script>
+	import QRCode from "qrcodejs2"
 	export default {
 		data() {
 			return {
 				
 			}
 		},
+		mounted() {
+			this.init();
+		},
 		methods: {
-			
+			init(){
+				var _this = this;
+				this.qrcode = new QRCode('qrcode',{
+					width:130,
+					height:130,
+					text:"http://www.baidu.com",
+					colorDark:'#000',
+					colorLight:'#fff'
+				})
+			}
 		}
 	}
 </script>
