@@ -89,13 +89,7 @@
 		data() {
 			return {
 				user: JSON.stringify(this.$store.state.userInfo),
-				findList: [{
-						index:0,
-						src: "https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200fc80000brcq4qpevctv7pnq6thg&ratio=720p&line=0",
-						posterSrc: "https://p9-dy.byteimg.com/img/tos-cn-p-0015/1805c9ca6dd8497eb37159c3c9faf5f6~c5_300x400.jpeg?from=2563711402_large",
-						intro: "为什么学习？最佳是兴趣，最俗是一技之长",
-						headimg: "http://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20190115/87868f21befc4e7f9007aa71efa79621.jpeg"
-					},
+				findList: [
 					{	
 						index:1,
 						src: "https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200fe70000bquvmisthbi0h53ah6d0&ratio=720p&line=0",
@@ -109,6 +103,13 @@
 						posterSrc: "https://p3-dy.byteimg.com/img/tos-cn-p-0015/1939bd44c2a246538be941193d8f360b~c5_300x400.jpeg?from=2563711402_large",
 						intro: "啤酒瓶升值计划",
 						headimg: "http://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20190115/87868f21befc4e7f9007aa71efa79621.jpeg"
+					},
+					{
+							index:0,
+							src: "https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200fc80000brcq4qpevctv7pnq6thg&ratio=720p&line=0",
+							posterSrc: "https://p9-dy.byteimg.com/img/tos-cn-p-0015/1805c9ca6dd8497eb37159c3c9faf5f6~c5_300x400.jpeg?from=2563711402_large",
+							intro: "为什么学习？最佳是兴趣，最俗是一技之长",
+							headimg: "http://5b0988e595225.cdn.sohucs.com/q_70,c_zoom,w_640/images/20190115/87868f21befc4e7f9007aa71efa79621.jpeg"
 					},
 					{
 						index:3,
@@ -153,9 +154,6 @@
 				})
 			}
 		},
-		onLoad() {
-			console.log(this.user);
-		},
 		methods: {
 			onNavigationBarButtonTap() {
 				let _this = this;
@@ -163,11 +161,10 @@
 				uni.scanCode({
 					success: function(res) {
 						console.log("scan success!");
+						//此处res.result为app扫码登录接口url拼接token参数
 						console.log("内容为：" + res.result);
-						if(res.result)
-						console.log("路径为：" + res.path);
 						uni.request({
-							url:"app后端扫码登录接口?token="+res.result+"&uid="+_this.$store.state.userInfo.uid
+							url:res.result+"&uid="+_this.$store.state.userInfo.uid
 						})
 					}
 				})

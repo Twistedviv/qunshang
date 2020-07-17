@@ -3261,23 +3261,7 @@ var render = function() {
       _c(
         "v-uni-view",
         { staticClass: _vm._$g(5, "sc"), attrs: { _i: 5 } },
-        [
-          _c(
-            "v-uni-view",
-            { staticClass: _vm._$g(6, "sc"), attrs: { _i: 6 } },
-            [
-              _c(
-                "v-uni-navigator",
-                { attrs: { url: "../live/live-push", _i: 7 } },
-                [_vm._v("录制直播")]
-              ),
-              _c("v-uni-navigator", { attrs: { url: "../live/live", _i: 8 } }, [
-                _vm._v("看直播")
-              ])
-            ],
-            1
-          )
-        ],
+        [_c("v-uni-view", { staticClass: _vm._$g(6, "sc"), attrs: { _i: 6 } })],
         1
       )
     ],
@@ -3641,12 +3625,12 @@ var render = function() {
                       _c(
                         "v-uni-view",
                         { staticClass: _vm._$g(18, "sc"), attrs: { _i: 18 } },
-                        [_vm._v("小黑")]
+                        [_vm._v(_vm._$g(18, "t0-0"))]
                       ),
                       _c(
                         "v-uni-view",
                         { staticClass: _vm._$g(19, "sc"), attrs: { _i: 19 } },
-                        [_vm._v("身份：会员")]
+                        [_vm._v("身份：" + _vm._$g(19, "t0-0"))]
                       )
                     ],
                     1
@@ -3682,7 +3666,7 @@ var render = function() {
                       _c(
                         "v-uni-view",
                         { staticClass: _vm._$g(24, "sc"), attrs: { _i: 24 } },
-                        [_vm._v("个性签名")]
+                        [_vm._v(_vm._$g(24, "t0-0"))]
                       )
                     ],
                     1
@@ -5175,11 +5159,7 @@ var render = function() {
         "v-uni-swiper",
         {
           style: _vm._$g(1, "s"),
-          attrs: {
-            "indicator-dots": true,
-            "indicator-color": _vm._$g(1, "a-indicator-color"),
-            _i: 1
-          }
+          attrs: { "indicator-dots": true, "indicator-color": "white", _i: 1 }
         },
         [
           _c(
@@ -5201,7 +5181,15 @@ var render = function() {
                   ),
                   _c(
                     "v-uni-view",
-                    { staticClass: _vm._$g(5, "sc"), attrs: { _i: 5 } },
+                    {
+                      staticClass: _vm._$g(5, "sc"),
+                      attrs: { _i: 5 },
+                      on: {
+                        click: function($event) {
+                          return _vm.$handleViewEvent($event)
+                        }
+                      }
+                    },
                     [_c("tki-qrcode", { ref: "qrcode", attrs: { _i: 6 } })],
                     1
                   )
@@ -5232,10 +5220,14 @@ var render = function() {
                     attrs: {
                       type: "text",
                       name: "",
-                      id: "",
                       disabled: "true",
                       value: _vm._$g(10, "a-value"),
                       _i: 10
+                    },
+                    on: {
+                      click: function($event) {
+                        return _vm.$handleViewEvent($event)
+                      }
                     }
                   })
                 ],
@@ -6856,7 +6848,38 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("v-uni-view", { attrs: { _i: 0 } }, [_vm._v("社群页面")])
+  return _c(
+    "v-uni-view",
+    { attrs: { _i: 0 } },
+    [
+      _vm._v("社群页面"),
+      _c(
+        "v-uni-button",
+        {
+          attrs: { _i: 1 },
+          on: {
+            click: function($event) {
+              return _vm.$handleViewEvent($event)
+            }
+          }
+        },
+        [_vm._v("录直播")]
+      ),
+      _c(
+        "v-uni-button",
+        {
+          attrs: { _i: 2 },
+          on: {
+            click: function($event) {
+              return _vm.$handleViewEvent($event)
+            }
+          }
+        },
+        [_vm._v("看直播")]
+      )
+    ],
+    1
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []

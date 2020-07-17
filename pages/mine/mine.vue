@@ -23,10 +23,10 @@
 							<view></view>
 						</view>
 						<view class="content-top-user-left-name">
-							小黑
+							{{this.$store.state.userInfo.uname}}
 						</view>
 						<view class="content-top-user-left-identity">
-							身份：会员
+							身份：{{identity}}
 						</view>
 					</view>
 					<view class="content-top-user-right">
@@ -37,7 +37,7 @@
 							<view class="content-top-user-right-top-select"></view>
 						</view>
 						<view class="content-top-user-right-bottom">
-							个性签名
+							{{this.$store.state.userInfo.introduce}}
 						</view>
 					</view>
 				</view>
@@ -74,6 +74,12 @@
 			return {
 				
 				
+			}
+		},
+		computed:{
+			identity:function(){
+				let arr = ["粉丝","会员","店主","主播","群主","代理商"];
+				return arr[this.$store.state.userInfo.identity];
 			}
 		},
 		components:{
@@ -128,9 +134,9 @@
 							console.log("用户点击确认退出");
 							try{
 								uni.removeStorage({
-									key:"userData",
+									key:"userInfo",
 									success:function(){
-										_this.$store.commit("setUserData",{});
+										_this.$store.commit("setUserInfo",{});
 										console.log("成功移除userInfo");
 										uni.reLaunch({
 											url:"../login/login",

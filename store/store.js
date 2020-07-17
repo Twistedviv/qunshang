@@ -10,9 +10,6 @@ const store = new Vuex.Store({
 		iStatusBarHeight:0
 	},
 	mutations: {
-		increment(state) {
-			state.count++;
-		},
 		getWindowsHeight(state){
 			state.windowsHeight = uni.getSystemInfoSync().windowHeight;
 		},
@@ -26,7 +23,7 @@ const store = new Vuex.Store({
 	},
 	actions:{
 		setUserInfo(context,value){
-			context.commit('setUseInfo',value)
+			context.commit('setUserInfo',value)
 		}
 	}
 })

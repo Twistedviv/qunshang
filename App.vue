@@ -22,20 +22,16 @@
 					};
 					// #endif
 				}
-			})
-			
-
-			
+			})		
 		},
-		onShow: function() {
-			
+		onShow: function() {		
 			console.log('App 开启')
 			//app onShow时，检查是否已登录，否则跳转登录
 			try {
-				uni.getStorage({key:'userData',
+				uni.getStorage({key:'userInfo',
 					success:function(res){
 						console.log("自动登陆成功："+JSON.stringify(res.data))
-						store.dispatch("setUserData",res.data); //存入Vuex状态
+						store.dispatch("setUserInfo",res.data); //存入Vuex状态
 					},
 					fail:function(){
 						console.log("获取用户数据失败")
@@ -45,8 +41,7 @@
 					}
 				})} catch (e) {
 					console.log("检查缓存出错："+e)
-				}
-			
+				}		
 		},
 		onHide: function() {
 			console.log('App 关闭')

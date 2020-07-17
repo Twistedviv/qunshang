@@ -9,8 +9,7 @@
 		</view>
 		<view class="content">
 			<view class="list">
-				<navigator url="../live/live-push">录制直播</navigator>
-				<navigator url="../live/live">看直播</navigator>
+				
 			</view>
 		</view>
 	</view>
@@ -38,7 +37,7 @@
 				uni.navigateTo({
 					url:"relative/relative"
 				})
-			},
+			}
 		}
 	}
 </script>

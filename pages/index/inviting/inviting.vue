@@ -1,18 +1,18 @@
 <template>
 	<view>
-		<swiper :indicator-dots="true" :indicator-color="white" :style="{height:windowsHeight+'px'}">
+		<swiper :indicator-dots="true" indicator-color="white" :style="{height:windowsHeight+'px'}">
 			<swiper-item>
 				<view class="swiper-item item1" :style="{height:windowsHeight+'px'}">
 					<view class="title1">保存二维码发送给朋友扫码即可邀请</view>
-					<view class="qrimg">
-						<tki-qrcode ref="qrcode" :val="val" :size="340"></tki-qrcode>
+					<view class="qrimg" @click="saveQrcode">
+						<tki-qrcode ref="qrcode" :val="inviteUrl" :size="340"></tki-qrcode>
 					</view>
 				</view>
 			</swiper-item>
 			<swiper-item>
 				<view class="swiper-item item2" :style="{height:windowsHeight+'px'}">
 					<view class="title2">点击链接复制发送给朋友打开即可邀请</view>
-					<input type="text" name="" id="" disabled="true" :value="url">
+					<input type="text" name="" disabled="true" :value="inviteUrl" @click="copyUrl">
 				</view>
 			</swiper-item>
 		</swiper>
@@ -25,8 +25,16 @@
 		data() {
 			return {
 				windowsHeight:100,
-				qrcodeSrc:"",
-				val:"http://www.baidu.com"
+			}
+		},
+		computed:{
+			//扫码注册URL：注册链接+邀请码
+			inviteUrl:function(){
+				//此处为web注册页面
+				let url = "http://212.129.235.182:88/regist.html";
+				//此处为用户邀请码
+				let invitecode = this.$store.state.userInfo.invitecode;
+				return url+"?invitecode="+invitecode;
 			}
 		},
 		components:{
@@ -36,16 +44,7 @@
 			this.$store.commit('getWindowsHeight');
 			this.windowsHeight = this.$store.state.windowsHeight;
 			console.log("当前页面高度："+this.$store.state.windowsHeight);
-			uni.getImageInfo({
-				src:"",
-				success:function(res){
-					this.qrcodeSrc = res.path;
-					console.log("获取邀请二维码成功！本地路径为："+this.qrcodeSrc);
-				}
-			});
-			
-			//将请求到的url字符串
-			// this.url = 
+
 		},
 		mounted() {
 			this.$refs.qrcode._makeCode();
@@ -54,21 +53,15 @@
 			
 			//保存二维码
 			saveQrcode(){
-				uni.saveImageToPhotosAlbum({
-					filePath:this.qrcodeSrc,
-					success:function(){
-						uni.showToast({
-							title:"图片已保存至相册"
-						})
-					}
-				})
+				this.$refs.qrcode._saveCode();
 			},
+			//复制邀请链接
 			copyUrl(){
 				uni.setClipboardData({
 					data:this.url,
 					success:function(){
 						uni.showToast({
-							title:"链接已复制到剪贴板"
+							title:"链接已复制 "
 						})
 					}
 				})

@@ -18,6 +18,9 @@
 				<text class="set-title" :style="{color:isWhite?'#007AFF':'#ffffff'}">美白</text>
 			</cover-view>
 		</cover-view>
+		<cover-view class="bottomList">
+
+		</cover-view>
 		        <button class="btn" @click="start">开始推流</button>
 		        <button class="btn" @click="pause">暂停推流</button>
 		        <button class="btn" @click="resume">resume</button>
@@ -55,6 +58,7 @@
             this.context = uni.createLivePusherContext("livePusher", this);
 			this.$store.commit('getWindowsHeight');
 			console.log("当前页面高度"+this.$store.state.windowsHeight);
+			
         },
         methods: {
 				statechange(e) {
@@ -159,8 +163,7 @@
 
 <style>
 	.livePusher{
-		width: 750rpx;
-		
+		width: 750rpx;		
 	}
 	.sets{
 		position: absolute;

@@ -76,12 +76,12 @@
 						"content-type":"application/x-www-form-urlencoded"
 					},
 					success:function(res){
-						console.log("request成功！\r")
-						console.log(res)
+						console.log("request成功")
 						if(res.data.statusCode == 1){
-							console.log("status==1！\r")
+							console.log("status==1")
 							//用户数据赋值
 							let userInfo = res.data.userInfo;
+							console.log(userInfo);
 							//保存用户信息和accesstoken
 							_this.$store.dispatch("setUserInfo",userInfo); //存入Vuex状态
 							try {
@@ -98,8 +98,7 @@
 									console.log("跳转登录成功！")
 								}
 							})},1000);
-						
-						
+											
 						}else{
 							console.log("status==unknow！\r")
 							//登录失败，打印错误信息
